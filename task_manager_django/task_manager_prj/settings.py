@@ -18,9 +18,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
+from dotenv import load_dotenv
 
+import os
+
+load_dotenv()
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-8i%=+yam-60a%i@&6p8pb*zn^oikb^p8%k1(okzc&32r7av0ka'
+SECRET_KEY = os.getenv('DJANGOSECRETKEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -80,9 +84,7 @@ WSGI_APPLICATION = 'task_manager_prj.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-from dotenv import load_dotenv
-import os
-load_dotenv()
+
 print("HOST= ", os.getenv('SQLHOST'))
 print("USER= ", os.getenv('SQLUSER'))
 # print("PWD = ", os.getenv('SQLPWD'))
