@@ -54,7 +54,7 @@ When a user logs in, all of their tasks are displayed on their user view page, w
 
 2. **Modifying a Task:**
   
-If a user wants to modify a task, they can click on the "Modify Task" button next to the task they want to modify. This button is created using HTML and JavaScript as `<button onclick="location.href='/modify_task/{{ username }}/{{ task.title }}'">Modify Task</button>` in  [user_view.html](https://github.com/divaamahajan/Task-Manager/blob/main/task_manager_django/task_manager_app/templates/user_view.html) and a click on it, generates a link to the "`modify_task/<str:username>/<str:task_title>/`" view in this Django app.
+If a user wants to modify a task, they can click on the "`Modify Task`" button next to the task they want to modify. This button is created using HTML and JavaScript as `<button onclick="location.href='/modify_task/{{ username }}/{{ task.title }}'">Modify Task</button>` in  [user_view.html](https://github.com/divaamahajan/Task-Manager/blob/main/task_manager_django/task_manager_app/templates/user_view.html) and a click on it, generates a link to the "`modify_task/<str:username>/<str:task_title>/`" view in this Django app.
 
 3. **URL Routing:**
 
@@ -70,7 +70,7 @@ The "`TaskForm`" class in our app's [forms.py](https://github.com/divaamahajan/T
 
 6. **HTTP Methods:**
 
-When a user submits the form with modified data, the "`POST`" method is used to send the data to the server. The view function checks for the "POST" method and, if it is detected, the modified data is saved to the database using the "`modify`" function of the "`TaskForm`" class in our app's [forms.py](https://github.com/divaamahajan/Task-Manager/blob/main/task_manager_django/task_manager_app/forms.py) file.
+When a user submits the form with modified data, the "`POST`" method is used to send the data to the server. The view function checks for the "`POST`" method and, if it is detected, the modified data is saved to the database using the "`modify`" function of the "`TaskForm`" class in our app's [forms.py](https://github.com/divaamahajan/Task-Manager/blob/main/task_manager_django/task_manager_app/forms.py) file.
 
 7. **Templates:**
 
