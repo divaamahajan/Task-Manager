@@ -26,10 +26,16 @@ Overall, the combination of these technologies and languages helped us in buildi
 ## Getting Started:
 To use the task tracker app, you can directly go to the link [Task Tracker App](ec2-54-82-112-252.compute-1.amazonaws.com/login.php)
 >To use the app on your local server, 
-- the user can clone the git repository, 
-- install the required dependencies, 
-- remove cookies and run the Django server.
-- create a .env file with SQLHOST, SQLUSER, SQLPWD, SQLDB, SQLPORT
+>- the user can clone the git repository, 
+>- create a .env file with SQLHOST, SQLUSER, SQLPWD, SQLDB, SQLPORT, DJANGOSECRETKEY
+>- remove cookies from html and php pages in [templates](https://github.com/divaamahajan/Task-Manager/tree/main/task_manager_django/task_manager_app/templates)
+>- install the required dependencies, 
+>- run the Django server.
+
+### Modifications require to run this app in local browser
+- create a .env file with SQLHOST, SQLUSER, SQLPWD, SQLDB, SQLPORT, DJANGOSECRETKEY
+- remove cookies from html and php pages in [templates](https://github.com/divaamahajan/Task-Manager/tree/main/task_manager_django/task_manager_app/templates)
+- in [views.py](https://github.com/divaamahajan/Task-Manager/blob/main/task_manager_django/task_manager_app/views.py) file update return values of functions index, create_user,and forgot_password with user registration details
 
 ### Django Server execution
 1. `source venv_tm/bin/activate` : Activate the virtual environment. This will activate the virtual environment and allow you to access all installed necessary packages for your Django app.
