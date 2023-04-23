@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tasks for {{ username }}</title>
+	<style>
+		table {
+			border-collapse: collapse;
+			width: 100%;
+		}
+		th, td {
+			text-align: left;
+			padding: 8px;
+			border-bottom: 1px solid #ddd;
+		}
+		tr:hover {background-color: #f5f5f5;}
+		button {
+			background-color: #4CAF50;
+			color: white;
+			border: none;
+			cursor: pointer;
+			padding: 10px;
+			border-radius: 5px;
+			margin-right: 5px;
+		}
+		button:hover {
+			background-color: #3e8e41;
+		}
+	</style>
+	
+</head><body>
+	<div style="text-align: right;">
+		<button onclick="location.href=''">Logout</button>
+	</div>
+	<h1>Tasks for {{ name }}</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>Task Name</th>
+				<th>Description</th>
+				<th>Status</th>
+				<th>Due Date</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for task in user_tasks %}
+				<tr>
+					<td>{{ task.title}}</td>
+					<td>{{ task.description }}</td>
+					<td>{{ task.status }}</td>
+					<td>{{ task.due_date }}</td>
+					<td>
+						<button onclick="location.href='/delete_task/{{ username }}/{{ task.title }}'">Delete Task</button>
+						<button onclick="location.href='/modify_task/{{ username }}/{{ task.title }}'">Modify Task</button>
+					</td>
+				</tr>
+			{% empty %}
+				<tr>
+					<td colspan="5">No tasks found.</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="5" style="text-align: right;">
+					<button onclick="location.href='/add_task/{{ username }}'">Add Task</button>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+</body>
+</html>
