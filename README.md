@@ -1,8 +1,8 @@
 # Task-Manager
-##Introduction:
+## Introduction:
 This is a task tracker web application that allows users to create tasks, edit and delete them, view all tasks, and sort them by title, status, and due date. Users can log in by entering their name and will only see their tasks. The app allows users to access their tasks from any device as the data is stored server-side.
 
-##Features:
+## Features:
 
 1. Create a task with a title, description, status (completed, in progress, etc.), and due date.
 2. Edit and delete tasks.
