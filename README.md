@@ -35,10 +35,11 @@ To use the task tracker app, you can directly go to the link [Task Tracker App](
 - run the [Django server](https://github.com/divaamahajan/Task-Manager#django-server-execution).
 
 ### Django Server execution
-1. `source venv_tm/bin/activate` : Activate the virtual environment. This will activate the virtual environment and allow you to access all installed necessary packages for your Django app.
-2. `python3 task_manager_django/manage.py runserver 8000` : run your Django app. This will start the Django development server and your app will be available at http://localhost:8000/. where localhost can be EC2 server if you execute this command in EC2 server
+1. Install the required dependencies by running [shell script](https://github.com/divaamahajan/Task-Manager/blob/main/install_requirements.sh).
+> if they do not align with your system refer [requirement.txt](https://github.com/divaamahajan/Task-Manager/blob/main/requirements.txt) and install the required dependencies mannually
+2. [`python3 task_manager_django/manage.py runserver 8000`](https://github.com/divaamahajan/Task-Manager/blob/main/task_manager_django/manage.py) :  run your Django app. This will start the Django development server and your app will be available at http://localhost:8000/. where localhost can be EC2 server if you execute this command in EC2 server
 
-### Some important things to know about your Django app:
+### Some important things to know about Django app:
 1. [app/models.py](https://github.com/divaamahajan/Task-Manager/blob/main/task_manager_django/task_manager_app/models.py) is a file that contains the database models for your app. These models define the structure and behavior of the data stored in your database.
 2. [app/forms.py](https://github.com/divaamahajan/Task-Manager/blob/main/task_manager_django/task_manager_app/forms.py) is a file that contains the forms for your app. These forms allow users to input data and submit it to your app. Forms can also be used to validate user input and convert data into the correct format.
 3. [app/views.py](https://github.com/divaamahajan/Task-Manager/blob/main/task_manager_django/task_manager_app/views.py) is a file that contains the logic for handling incoming requests and generating responses. When a user makes a request to your app, the request is routed to a view function, which generates an HTTP response.
