@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Confirm deletion of task</title>
+	<style>
+		table {
+			border-collapse: collapse;
+			margin-top: 20px;
+		}
+		th, td {
+			padding: 8px;
+			border: 1px solid #ddd;
+			text-align: left;
+		}
+		th {
+			background-color: #f2f2f2;
+		}
+		button {
+			margin-top: 20px;
+			padding: 10px 20px;
+			border-radius: 5px;
+			background-color: #4CAF50;
+			color: white;
+			border: none;
+			cursor: pointer;
+		}
+		button:hover {
+			background-color: #3e8e41;
+		}
+	</style>
+</head>
+<body>
+	<script>
+		// Split the cookie string into an array of individual cookies
+		var cookies = document.cookie.split(';');
+		var cookieExist = false;
+  
+		// Loop through the cookies and check if the name matches
+		for (var i = 0; i < cookies.length; i++) {
+			var cookie = cookies[i].trim();
+			
+			if (cookie.indexOf('username') == 0) {
+				// The cookie exist, do something here
+				cookieExist = true;
+			}
+		}
+  
+		// The cookie does not exist
+		if (!cookieExist) window.location.replace("https://ec2-54-82-112-252.compute-1.amazonaws.com/login.php");
+	</script>
+	<h1>Confirm deletion of task</h1>
+	<p>Are you sure you want to delete the following task?</p>
+	<table>
+		<tbody>
+			<tr>
+				<th>Task Name:</th>
+				<td>{{ task.title }}</td>
+			</tr>
+			<tr>
+				<th>Description:</th>
+				<td>{{ task.description }}</td>
+			</tr>
+			<tr>
+				<th>Status:</th>
+				<td>{{ task.status }}</td>
+			</tr>
+			<tr>
+				<th>Due Date:</th>
+				<td>{{ task.due_date }}</td>
+			</tr>
+		</tbody>
+	</table>
+	<form method="POST">
+		{% csrf_token %}
+		<button type="submit">Confirm deletion</button>
+		<button type="button" onclick="location.href='/user/{{ task.username }}'">Cancel</button>
+	</form>
+</body>
+</html>

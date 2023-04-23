@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>Add Task for {{ name }}</h1>
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+  <form method="POST">
+    {% csrf_token %}
+    <label for="{{ form.title.id_for_label }}">Title:</label>
+    {{ form.title }}
+    <label for="{{ form.description.id_for_label }}">Description:</label>
+    {{ form.description }}
+    <label for="{{ form.status.id_for_label }}">Status:</label>
+    {{ form.status }}
+    <label for="{{ form.due_date.id_for_label }}">Due Date:</label>
+    {{ form.due_date }}
+    <button type="submit">Save</button>
+  </form>
+{% endblock %}

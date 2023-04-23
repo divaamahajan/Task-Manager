@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tasks for {{ username }}</title>
+	<style>
+		table {
+			border-collapse: collapse;
+			width: 100%;
+		}
+		th, td {
+			text-align: left;
+			padding: 8px;
+			border-bottom: 1px solid #ddd;
+		}
+		tr:hover {background-color: #f5f5f5;}
+		button {
+			background-color: #4CAF50;
+			color: white;
+			border: none;
+			cursor: pointer;
+			padding: 10px;
+			border-radius: 5px;
+			margin-right: 5px;
+		}
+		button:hover {
+			background-color: #3e8e41;
+		}
+	</style>
+</head>
+<body>
+	<!-- <script>
+		// Split the cookie string into an array of individual cookies
+		var cookies = document.cookie.split(';');
+		var cookieExist = false;
+  
+		// Loop through the cookies and check if the name matches
+		for (var i = 0; i < cookies.length; i++) {
+			var cookie = cookies[i].trim();
+			
+			if (cookie.indexOf('username') == 0) {
+				// The cookie exist, do something here
+				cookieExist = true;
+			}
+		}
+  
+		// The cookie does not exist
+		if (!cookieExist) window.location.replace("https://ec2-54-82-112-252.compute-1.amazonaws.com/login.php");
+	</script> -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+	$(document).ready(function() {
+	// Add a click event listener to the sort buttons
+	$(".sort-button").click(function() {
+		var sortType = $(this).data("sort-type");
+		var sortDir = $(this).data("sort-dir") || "asc";
+		var rows = $("#task-table tbody tr").toArray();
+		rows.sort(function(a, b) {
+			var aVal, bVal;
+			if (sortType === 3) { // sort by due_date
+				aVal = Date.parse($(a).find("td").eq(sortType).text());
+				bVal = Date.parse($(b).find("td").eq(sortType).text());
+			} else {
+				aVal = $(a).find("td").eq(sortType).text().toUpperCase();
+				bVal = $(b).find("td").eq(sortType).text().toUpperCase();
+			}
+			if (sortDir === "asc") {
+				return (aVal > bVal) ? 1 : -1;
+			} else {
+				return (aVal < bVal) ? 1 : -1;
+			}
+		});
+		$("#task-table tbody").empty().append(rows);
+		$(this).data("sort-dir", sortDir === "asc" ? "desc" : "asc");
+	});
+	});
+	</script>
+	
+	<div style="text-align: right;">
+		<button onclick="logout()">Logout</button>
+	</div>
+	
+	<h1>Tasks for {{ name }}</h1>
+
+	<div style="display: flex; align-items: center; margin-bottom: 10px;">
+	  <div style="flex: 1;">
+		<input type="text" id="filter-task-name" placeholder="Filter by task name" style="padding: 5px; border-radius: 5px; border: 1px solid gray;">
+	  </div>
+	  <div style="flex: 1;">
+		<input type="text" id="filter-task-desc" placeholder="Filter by description" style="padding: 5px; border-radius: 5px; border: 1px solid gray;">
+	  </div>
+	  <div style="flex: 1;">
+		<select id="filter-task-status" style="padding: 5px; border-radius: 5px; border: 1px solid gray;">
+		  <option value="">Filter by status</option>
+		  <option value="assigned">Assigned</option>
+		  <option value="in progress">In Progress</option>
+		  <option value="completed">Completed</option>
+		</select>
+	  </div>
+	  <div style="flex: 1;">
+		<select id="filter-task-due-date-comparator" onchange="toggleDueDateInput()" style="padding: 5px; border-radius: 5px; border: 1px solid gray;">
+		  <option value="">Filter by due date</option>
+		  <option value="on">On</option>
+		  <option value="before">Before</option>
+		  <option value="after">After</option>
+		</select>
+		<input type="date" id="filter-task-due-date" placeholder="Select date" style="display:none; padding: 5px; border-radius: 5px; border: 1px solid gray;">
+	  </div>
+	  <div style="flex: 1;">
+		<button onclick="applyFilters()" style="padding: 5px 10px; border-radius: 5px; border: none; background-color: #4CAF50; color: white; font-weight: bold;">Apply Filters</button>
+	  </div>
+	</div>
+	
+	<script>
+		function toggleDueDateInput() {
+			var comparator = document.getElementById("filter-task-due-date-comparator").value;
+			var dueDateInput = document.getElementById("filter-task-due-date");
+			if (comparator !== "") {
+				dueDateInput.style.display = "inline-block";
+			} else {
+				dueDateInput.style.display = "none";
+			}
+		}
+		window.onload = function() {
+			document.getElementById("filter-task-name").value = "";
+			document.getElementById("filter-task-desc").value = "";
+			document.getElementById("filter-task-status").selectedIndex = 0;
+			document.getElementById("filter-task-due-date-comparator").selectedIndex = 0;
+			document.getElementById("filter-task-due-date").value = "";
+		};
+	</script>
+	
+	<table id="task-table">
+		<thead>
+			<tr>
+				<th>Task Name <button class="sort-button" data-sort-type="0">▲</button></th>
+				<th>Description <button class="sort-button" data-sort-type="1">▲</button></th>
+				<th>Status <button class="sort-button" data-sort-type="2">▲</button></th>
+				<th>Due Date <button class="sort-button" data-sort-type="3">▲</button></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for task in user_tasks %}
+			<tr data-task-name="{{ task.title }}" data-task-desc="{{ task.description }}" data-task-status="{{ task.status }}" data-task-due-date="{{ task.due_date }}">
+					<td>{{ task.title}}</td>
+					<td>{{ task.description }}</td>
+					<td>{{ task.status }}</td>
+					<td>{{ task.due_date }}</td>
+					<td>
+						<button onclick="location.href='/delete_task/{{ username }}/{{ task.title }}'">Delete Task</button>
+						<button onclick="location.href='/modify_task/{{ username }}/{{ task.title }}'">Modify Task</button>
+					</td>
+				</tr>
+			{% empty %}
+				<tr>
+					<td colspan="5">No tasks found.</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="5" style="text-align: right;">
+					<button onclick="location.href='/add_task/{{ username }}'">Add Task</button>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+<!-- JS script here -->
+<script>
+    function applyFilters() {
+    var filterName = $("#filter-task-name").val().toUpperCase();
+    var filterDesc = $("#filter-task-desc").val().toUpperCase();
+    var filterStatus = $("#filter-task-status").val().toUpperCase();
+    var filterDueDate = $("#filter-task-due-date").val();
+    var filterDueDateComparator = $("#filter-task-due-date-comparator").val();
+
+    $("#task-table tbody tr").each(function() {
+        var taskName = $(this).data("task-name").toUpperCase();
+        var taskDesc = $(this).data("task-desc").toUpperCase();
+        var taskStatus = $(this).data("task-status").toUpperCase();
+        var taskDueDate = $(this).data("task-due-date");
+
+        var show = true;
+
+        if (filterName && taskName.indexOf(filterName) === -1) {
+            show = false;
+        }
+
+        if (filterDesc && taskDesc.indexOf(filterDesc) === -1) {
+            show = false;
+        }
+
+        if (filterStatus && taskStatus !== filterStatus) {
+            show = false;
+        }
+
+        if (filterDueDate && filterDueDateComparator) {
+            var taskDueDateObj = new Date(taskDueDate);
+            var filterDueDateObj = new Date(filterDueDate);
+
+            if (filterDueDateComparator === "on" && taskDueDateObj.getTime() !== filterDueDateObj.getTime()) {
+                show = false;
+            }
+
+            if (filterDueDateComparator === "before" && taskDueDateObj >= filterDueDateObj) {
+                show = false;
+            }
+
+            if (filterDueDateComparator === "after" && taskDueDateObj <= filterDueDateObj) {
+                show = false;
+            }
+        }
+
+        if (show) {
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
+    });
+}
+
+
+</script>
+
+<!-- This logout function will delete all cookie and redirect user back to login page -->
+<script>
+  function logout(){
+    document.cookie.split(";").forEach(cookie => document.cookie = cookie.replace(/^ +/, "").replace(/=.*/, "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/"));
+    window.location.replace("https://ec2-54-82-112-252.compute-1.amazonaws.com/login.php");
+  }
+</script>
+</body>
+</html>

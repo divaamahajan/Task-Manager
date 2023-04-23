@@ -1,0 +1,8 @@
+asgiref==3.6.0
+Django==4.2
+mysql==0.0.3
+mysql-connector==2.2.9
+mysqlclient==2.1.1
+PyMySQL==1.0.3
+python-dotenv==1.0.0
+sqlparse==0.4.4
