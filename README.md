@@ -50,32 +50,31 @@ The app/templates folder is a directory that contains HTML templates for renderi
 By following these steps, our Django app is able to route code from the user view page to the modify task page, retrieve and modify the necessary data from the database, and display the modified data to the user.
 1. **User Task List Page:**
 
-When a user logs in, all of their tasks are displayed on their user view page, which can be accessed by visiting "user/<username>". This page is rendered using HTML, CSS, JavaScript, and PHP and [user_view.html](https://github.com/divaamahajan/Task-Manager/blob/main/task_manager_django/task_manager_app/templates/user_view.html).
+When a user logs in, all of their tasks are displayed on their user view page, which can be accessed by visiting "`user/<username>`". This page is rendered using HTML, CSS, JavaScript, and PHP and [user_view.html](https://github.com/divaamahajan/Task-Manager/blob/main/task_manager_django/task_manager_app/templates/user_view.html).
 
 2. **Modifying a Task:**
   
-If a user wants to modify a task, they can click on the "Modify Task" button next to the task they want to modify. This button is created using HTML and JavaScript as `</button>
-this creates a link as modify_task/<str:username>/<str:task_title>/` and generates a link to the "modify_task/<str:username>/<str:task_title>/" view in this Django app.
+If a user wants to modify a task, they can click on the "Modify Task" button next to the task they want to modify. This button is created using HTML and JavaScript as `<button onclick="location.href='/modify_task/{{ username }}/{{ task.title }}'">Modify Task</button>` in  [user_view.html](https://github.com/divaamahajan/Task-Manager/blob/main/task_manager_django/task_manager_app/templates/user_view.html) and a click on it, generates a link to the "`modify_task/<str:username>/<str:task_title>/`" view in this Django app.
 
 3. **URL Routing:**
 
-The URL pattern for the "modify_task/<str:username>/<str:task_title>/" view is defined in the project's [urls.py](https://github.com/divaamahajan/Task-Manager/blob/main/task_manager_django/task_manager_prj/urls.py) file. When the link is clicked, the username and task title are passed as parameters in the URL as `path('modify_task/<str:username>/<str:task_title>/', views.modify_task, name='modify_task')`, which is then routed to the "modify_task" view function.
+The URL pattern for the "`modify_task/<str:username>/<str:task_title>/`" view is defined in the project's [urls.py](https://github.com/divaamahajan/Task-Manager/blob/main/task_manager_django/task_manager_prj/urls.py) file. When the link is clicked, the username and task title are passed as parameters in the URL as `path('modify_task/<str:username>/<str:task_title>/', views.modify_task, name='modify_task')`, which is then routed to the "`modify_task`" view function in [views.py](https://github.com/divaamahajan/Task-Manager/blob/main/task_manager_django/task_manager_app/views.py) file.
 
 4. **View Function:**
 
-The "modify_task" view function in your app's [views.py](https://github.com/divaamahajan/Task-Manager/blob/main/task_manager_django/task_manager_app/views.py) file is responsible for handling requests to modify a specific task. It first retrieves the user details `name = UserDetails.objects.filter(username=username).first()` and the task details ` task = UserTasks.objects.filter(username=username, title=task_title).first()` from the database using the username and task title parameters passed to the function.
+The "`modify_task`" view function in our app's [views.py](https://github.com/divaamahajan/Task-Manager/blob/main/task_manager_django/task_manager_app/views.py) file is responsible for handling requests to modify a specific task. It first retrieves the user details `name = UserDetails.objects.filter(username=username).first()` and the task details ` task = UserTasks.objects.filter(username=username, title=task_title).first()` from the database using the username and task title parameters passed to the function.
 
 5. **Forms:**
 
-The "TaskForm" class in our app's [forms.py](https://github.com/divaamahajan/Task-Manager/blob/main/task_manager_django/task_manager_app/forms.py) file is used to create a form that allows users to input modified data for a task. This form includes fields for the task title, description, status, and due date.
+The "`TaskForm`" class in our app's [forms.py](https://github.com/divaamahajan/Task-Manager/blob/main/task_manager_django/task_manager_app/forms.py) file is used to create a form that allows users to input the modified data for a task. This form includes fields for the task title, description, status, and due date.
 
 6. **HTTP Methods:**
 
-When a user submits the form with modified data, the "POST" method is used to send the data to the server. The view function checks for the "POST" method and, if it is detected, the modified data is saved to the database using the "modify" function of the "TaskForm" class in our app's [forms.py](https://github.com/divaamahajan/Task-Manager/blob/main/task_manager_django/task_manager_app/forms.py) file.
+When a user submits the form with modified data, the "`POST`" method is used to send the data to the server. The view function checks for the "POST" method and, if it is detected, the modified data is saved to the database using the "`modify`" function of the "`TaskForm`" class in our app's [forms.py](https://github.com/divaamahajan/Task-Manager/blob/main/task_manager_django/task_manager_app/forms.py) file.
 
 7. **Templates:**
 
-Finally, the modified task data is displayed to the user in the [modify_task.php](https://github.com/divaamahajan/Task-Manager/blob/main/task_manager_django/task_manager_app/templates/modify_task.php) template, which is rendered by the "modify_task" view function in [views.py](https://github.com/divaamahajan/Task-Manager/blob/main/task_manager_django/task_manager_app/views.py) file. The template includes fields for the task title, description, status, and due date, as well as a submit button for the user to save the changes.
+Finally, the modified task data is displayed to the user in the [modify_task.php](https://github.com/divaamahajan/Task-Manager/blob/main/task_manager_django/task_manager_app/templates/modify_task.php) template, which is rendered by the "`modify_task`" view function in [views.py](https://github.com/divaamahajan/Task-Manager/blob/main/task_manager_django/task_manager_app/views.py) file. The template includes fields for the task title, description, status, and due date, as well as a submit button for the user to save the changes.
 
 ## Conclusion:
 This task tracker app is a simple yet powerful tool for managing tasks. It allows users to keep track of their tasks and access them from any device. The app can be extended further by adding more features such as reminders, deadlines, and notifications.
