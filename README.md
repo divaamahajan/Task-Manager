@@ -25,7 +25,7 @@ Overall, the combination of these technologies and languages helped us in buildi
 
 ## Getting Started:
 To use the task tracker app, you can directly go to the link [Task Tracker App](ec2-54-82-112-252.compute-1.amazonaws.com/login.php)
-To use the app on your local server, 
+>To use the app on your local server, 
 - the user can clone the git repository, 
 - install the required dependencies, 
 - remove cookies and run the Django server.
