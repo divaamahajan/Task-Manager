@@ -24,18 +24,15 @@ Our Task Tracker app is built using a combination of several technologies and la
 Overall, the combination of these technologies and languages helped us in building a robust and scalable Task Tracker app, with seamless functionality and user experience.
 
 ## Getting Started:
-To use the task tracker app, you can directly go to the link [Task Tracker App](ec2-54-82-112-252.compute-1.amazonaws.com/login.php)
->To use the app on your local server, 
->- the user can clone the git repository, 
->- create a .env file with SQLHOST, SQLUSER, SQLPWD, SQLDB, SQLPORT, DJANGOSECRETKEY
->- remove cookies from html and php pages in [templates](https://github.com/divaamahajan/Task-Manager/tree/main/task_manager_django/task_manager_app/templates)
->- install the required dependencies, 
->- run the Django server.
+To use the task tracker app, you can directly go to the link [Task Tracker App](ec2-54-82-112-252.compute-1.amazonaws.com/login.php) to use this app from any device in your browser.
 
 ### Modifications require to run this app in local browser
+- The user can clone the git repository, 
 - create a .env file with SQLHOST, SQLUSER, SQLPWD, SQLDB, SQLPORT, DJANGOSECRETKEY
 - remove cookies from html and php pages in [templates](https://github.com/divaamahajan/Task-Manager/tree/main/task_manager_django/task_manager_app/templates)
-- in [views.py](https://github.com/divaamahajan/Task-Manager/blob/main/task_manager_django/task_manager_app/views.py) file update return values of functions index, create_user,and forgot_password with user registration details
+- in [views.py](https://github.com/divaamahajan/Task-Manager/blob/main/task_manager_django/task_manager_app/views.py) file update return values of functions index, create_user,and forgot_password with user registration details- 
+- install the required dependencies by running [shell script](https://github.com/divaamahajan/Task-Manager/blob/main/install_requirements.sh)
+- run the [Django server](https://github.com/divaamahajan/Task-Manager#django-server-execution).
 
 ### Django Server execution
 1. `source venv_tm/bin/activate` : Activate the virtual environment. This will activate the virtual environment and allow you to access all installed necessary packages for your Django app.
