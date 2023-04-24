@@ -1,4 +1,4 @@
-# [Task-Manager](ec2-54-82-112-252.compute-1.amazonaws.com/login.php)
+# Task-Manager [app](ec2-54-82-112-252.compute-1.amazonaws.com/login.php)
 ## Introduction:
 This is a task tracker web application that allows users to create tasks, edit and delete them, view all tasks, and sort them by title, status, and due date. Users can log in by entering their name and will only see their tasks. The app allows users to access their tasks from any device as the data is stored server-side.
 
