@@ -25,7 +25,7 @@ Our Task Tracker app is built using a combination of several technologies and la
 Overall, the combination of these technologies and languages helped us in building a robust and scalable Task Tracker app, with seamless functionality and user experience.
 
 ## Getting Started:
-To use the task tracker app, you can directly go to the link [Task Tracker App](ec2-54-82-112-252.compute-1.amazonaws.com/login.php) to use this app from any device in your browser.
+To use the task tracker app, you can directly go to the link [Task Tracker App](https://ec2-54-82-112-252.compute-1.amazonaws.com/login.php) to use this app from any device in your browser.
 
 ### Modifications require to run this app in local browser
 - The user can clone the git repository, 
